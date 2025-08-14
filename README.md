@@ -19,7 +19,7 @@ GROUP BY staff_id
 HAVING COUNT(c.customer_id) > 300;
 ```
 
-![png](image.png)
+![png](image-5.png)
 
 ### Задание 2
 
@@ -32,7 +32,7 @@ SELECT COUNT(length) AS 'Количество фильмов больше сре
 FROM film
 WHERE length > (SELECT AVG(length) FROM film);
 ```
-![png](image-1.png)
+![png](image-4.png)
 
 ### Задание 3
 
