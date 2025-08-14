@@ -41,10 +41,16 @@ WHERE length > (SELECT AVG(length) FROM film);
 ### Решение:
 
 ```
-SELECT DATE_FORMAT(payment_date, '%Y.%m') AS 'Год и месяц c наибольшей суммой платежей', COUNT(rental_id) AS 'Количество аренд за месяц'
-FROM payment
-GROUP BY DATE_FORMAT(payment_date, '%Y.%m')
-ORDER BY SUM(amount) DESC
-LIMIT 1;
+select	t.amount_of_payments,
+	t.month_of_payments,
+	(select count(r.rental_id)
+	from sakila.rental r
+	where DATE_FORMAT(r.rental_date, '%M %Y') = t.month_of_payments) 'count_of_rent'
+from (
+  select SUM(p.amount) 'amount_of_payments', DATE_FORMAT(p.payment_date, '%M %Y') 'month_of_payments' 
+  from sakila.payment p 
+  group by DATE_FORMAT(p.payment_date, '%M %Y')) t
+order by t.amount_of_payments desc  
+limit 1;
 ```
-![png](image-3.png)
+![png](image-6.png)
