@@ -47,4 +47,4 @@ GROUP BY DATE_FORMAT(payment_date, '%Y.%m')
 ORDER BY SUM(amount) DESC
 LIMIT 1;
 ```
-![png](image-2.png)
+![png](image-3.png)
